@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommentService } from './comment.service';
-import { COMMENTS } from './mock-comments';
+import { Comment } from './comment';
 
 @Component ({
     selector: 'comments',
@@ -11,17 +11,16 @@ import { COMMENTS } from './mock-comments';
         'username',
         'comment'
     ],
-    providers: [
-        CommentService
-    ]
+    providers: [ CommentService ]
 })
 export class CommentsComponent implements OnInit {
-    comments = COMMENTS;
+    comments: Comment[];
 
     constructor(private commentService: CommentService) { }
 
     getComments () {
         this.commentService.getComments().then(comments => this.comments = comments);
+        // this.comments = this.commentService.getComments()
     }
 
     ngOnInit(): void {
